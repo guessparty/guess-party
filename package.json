@@ -1,0 +1,19 @@
+{
+  "name": "guess-party-monorepo",
+  "private": true,
+  "version": "1.0.0",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev:tenant": "yarn workspace @guess-party/tenant-app dev",
+    "dev:landing-b2c": "yarn workspace @guess-party/landing-b2c dev",
+    "dev:landing-b2b": "yarn workspace @guess-party/landing-b2b dev",
+    "build:all": "yarn workspaces foreach -A run build"
+  },
+  "devDependencies": {
+    "eslint": "^9.9.0",
+    "prettier": "^3.3.3"
+  }
+}
