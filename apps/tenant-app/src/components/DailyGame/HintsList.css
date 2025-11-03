@@ -1,0 +1,61 @@
+.hints-list {
+  max-width: 600px;
+  margin: 0 auto 2rem;
+}
+
+.hints-list h3 {
+  text-align: center;
+  color: #333;
+  margin-bottom: 1rem;
+}
+
+.hints-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1rem;
+}
+
+.hint-item {
+  background: white;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  animation: slideIn 0.3s ease;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hint-label {
+  font-weight: 600;
+  color: #667eea;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.hint-value {
+  font-size: 1.1rem;
+  color: #333;
+}
+
+.hints-empty {
+  text-align: center;
+  padding: 2rem;
+  color: #666;
+}
+
+.hints-empty p {
+  font-size: 1.1rem;
+}
