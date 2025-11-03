@@ -1,31 +1,27 @@
 import { useState, useEffect } from 'react'
 import useLocalStorage from '../../hooks/useLocalStorage'
-import { getDailyPerson, getTodayDate } from '../../data/mockPersons'
+import { getDailyPerson, getTodayDate, mockPersons } from '../../data/mockPersons'
 import { 
-  checkGuess, 
-  calculateScore, 
-  getVisibleHints,
-  MAX_ATTEMPTS 
-} from '../../utils/gameHelpers'
-import PersonCard from './PersonCard'
-import GuessInput from './GuessInput'
-import HintsList from './HintsList'
+  comparePersons,
+  isWin,
+  MATCH_TYPES
+} from '../../utils/comparisonLogic'
+import AutocompleteInput from './AutocompleteInput'
+import AttemptsGrid from './AttemptsGrid'
 import GameStats from './GameStats'
 import ResultModal from '../ResultModal/ResultModal'
 import './DailyGame.css'
 
-// Composant principal du mode quotidien
 function DailyGame() {
-  // États pour le jeu actuel
+  // État du jeu
   const [dailyPerson] = useState(() => getDailyPerson())
-  const [attempts, setAttempts] = useState(0)
+  const [attempts, setAttempts] = useState([])
   const [gameOver, setGameOver] = useState(false)
-  const [isWin, setIsWin] = useState(false)
-  const [score, setScore] = useState(0)
+  const [isGameWon, setIsGameWon] = useState(false)
   const [showModal, setShowModal] = useState(false)
-  const [visibleHints, setVisibleHints] = useState([])
+  const [score, setScore] = useState(0)
 
-  // Sauvegarder les stats dans localStorage
+  // Statistiques sauvegardées
   const [stats, setStats] = useLocalStorage('guess-party-stats', {
     totalGames: 0,
     gamesWon: 0,
@@ -36,7 +32,7 @@ function DailyGame() {
     lastPlayedDate: null
   })
 
-  // Sauvegarder l'état de la partie du jour
+  // État de la partie du jour
   const [todayGame, setTodayGame] = useLocalStorage('guess-party-today', {
     date: null,
     played: false,
@@ -49,52 +45,60 @@ function DailyGame() {
     const today = new Date().toDateString()
     
     if (todayGame.date === today && todayGame.played) {
-      // La partie du jour a déjà été jouée
+      // Partie déjà jouée aujourd'hui
       setGameOver(true)
-      setIsWin(todayGame.won)
-      setAttempts(todayGame.attempts)
-      setScore(calculateScore(todayGame.attempts))
-      setVisibleHints(getVisibleHints(dailyPerson, todayGame.attempts))
+      setIsGameWon(todayGame.won)
     }
-  }, [todayGame, dailyPerson])
+  }, [todayGame])
 
-  // Fonction appelée quand le joueur fait une tentative
-  const handleGuess = (guess) => {
-    const newAttempts = attempts + 1
+  // Calculer le score selon le nombre de tentatives
+  const calculateScore = (numAttempts) => {
+    const scores = [100, 80, 60, 40, 20, 10]
+    return scores[numAttempts - 1] || 0
+  }
+
+  // Quand on sélectionne une personne
+  const handleSelectPerson = (selectedPerson) => {
+    if (gameOver) return
+
+    // Comparer les caractéristiques
+    const comparisonResults = comparePersons(selectedPerson, dailyPerson)
+
+    // Créer une nouvelle tentative
+    const newAttempt = {
+      person: selectedPerson,
+      comparisonResults
+    }
+
+    // Ajouter à la liste des tentatives
+    const newAttempts = [...attempts, newAttempt]
     setAttempts(newAttempts)
 
-    // Vérifier si la réponse est correcte
-    const correct = checkGuess(guess, dailyPerson.name)
-
-    if (correct) {
-      // Victoire !
-      const finalScore = calculateScore(newAttempts)
+    // Vérifier si c'est une victoire
+    if (isWin(comparisonResults)) {
+      const finalScore = calculateScore(newAttempts.length)
       setScore(finalScore)
-      setIsWin(true)
+      setIsGameWon(true)
       setGameOver(true)
       setShowModal(true)
-      
-      // Mettre à jour les statistiques
-      updateStats(true, newAttempts)
-      
-      // Sauvegarder la partie du jour
-      saveTodayGame(true, newAttempts)
-    } else {
-      // Mauvaise réponse, dévoiler un nouvel indice
-      setVisibleHints(getVisibleHints(dailyPerson, newAttempts))
 
+      // Mettre à jour les stats
+      updateStats(true, newAttempts.length)
+
+      // Sauvegarder la partie du jour
+      saveTodayGame(true, newAttempts.length)
+    } else {
       // Vérifier si c'était la dernière tentative
-      if (newAttempts >= MAX_ATTEMPTS) {
-        // Défaite
-        setIsWin(false)
+      if (newAttempts.length >= 6) {
+        setIsGameWon(false)
         setGameOver(true)
         setShowModal(true)
-        
-        // Mettre à jour les statistiques
-        updateStats(false, newAttempts)
-        
+
+        // Mettre à jour les stats
+        updateStats(false, newAttempts.length)
+
         // Sauvegarder la partie du jour
-        saveTodayGame(false, newAttempts)
+        saveTodayGame(false, newAttempts.length)
       }
     }
   }
@@ -110,11 +114,8 @@ function DailyGame() {
     // Calculer la nouvelle série
     let newStreak = stats.currentStreak
     if (won) {
-      // Si victoire et joué hier, continuer la série
-      // Sinon, recommencer à 1
       newStreak = lastPlayed === yesterdayStr ? stats.currentStreak + 1 : 1
     } else {
-      // Si défaite, série cassée
       newStreak = 0
     }
 
@@ -128,8 +129,7 @@ function DailyGame() {
       lastPlayedDate: today
     }
 
-    // Calculer les stats dérivées
-    newStats.averageAttempts = newStats.totalAttempts / newStats.totalGames
+    newStats.averageAttempts = (newStats.totalAttempts / newStats.totalGames).toFixed(1)
     newStats.firstTryPercentage = Math.round((newStats.firstTryWins / newStats.totalGames) * 100)
 
     setStats(newStats)
@@ -148,7 +148,7 @@ function DailyGame() {
 
   return (
     <div className="daily-game">
-      {/* En-tête avec la date */}
+      {/* En-tête */}
       <header className="daily-game-header">
         <h1>🎯 Guess Party - Mode Quotidien</h1>
         <p className="date">{getTodayDate()}</p>
@@ -156,33 +156,30 @@ function DailyGame() {
 
       {/* Contenu principal */}
       <div className="daily-game-content">
-        {/* Carte de la personne */}
-        <PersonCard person={dailyPerson} isRevealed={gameOver} />
-
-        {/* Liste des indices */}
-        <HintsList hints={visibleHints} />
-
-        {/* Champ de saisie (désactivé si partie terminée) */}
+        {/* Champ de saisie avec autocomplétion */}
         {!gameOver && (
-          <GuessInput 
-            onGuess={handleGuess}
+          <AutocompleteInput
+            persons={mockPersons}
+            onSelect={handleSelectPerson}
             disabled={gameOver}
-            attemptsLeft={MAX_ATTEMPTS - attempts}
           />
         )}
 
         {/* Message si partie déjà jouée */}
-        {gameOver && !showModal && (
-          <div className="game-over-message">
-            <p>
-              {isWin 
-                ? `🎉 Vous avez gagné aujourd'hui en ${attempts} tentative${attempts > 1 ? 's' : ''} !`
-                : `😔 Vous avez perdu aujourd'hui. C'était ${dailyPerson.name}.`
+        {gameOver && (
+          <div className="game-over-banner">
+            <p className="game-over-text">
+              {isGameWon
+                ? `🎉 Partie gagnée en ${attempts.length} tentative${attempts.length > 1 ? 's' : ''} !`
+                : `😔 Partie perdue. C'était ${dailyPerson.name}.`
               }
             </p>
-            <p className="next-game">⏰ Revenez demain pour une nouvelle personne !</p>
+            <p className="next-game-text">⏰ Revenez demain pour une nouvelle personne !</p>
           </div>
         )}
+
+        {/* Grille des tentatives */}
+        <AttemptsGrid attempts={attempts} />
 
         {/* Statistiques */}
         <GameStats stats={stats} />
@@ -191,9 +188,9 @@ function DailyGame() {
       {/* Modal de résultat */}
       <ResultModal
         isOpen={showModal}
-        isWin={isWin}
+        isWin={isGameWon}
         person={dailyPerson}
-        attempts={attempts}
+        attempts={attempts.length}
         score={score}
         onClose={() => setShowModal(false)}
       />

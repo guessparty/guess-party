@@ -1,0 +1,121 @@
+.characteristic-card {
+  background: white;
+  border-radius: 0.75rem;
+  padding: 1.25rem;
+  margin-bottom: 1rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  border-left: 6px solid #e5e7eb;
+  animation: slideIn 0.3s ease forwards;
+  opacity: 0;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* VERT - Exact Match */
+.characteristic-card.match-exact {
+  border-left-color: #10b981;
+  background: linear-gradient(90deg, rgba(16, 185, 129, 0.1) 0%, white 100%);
+}
+
+/* ORANGE - Partial Match */
+.characteristic-card.match-partial {
+  border-left-color: #f59e0b;
+  background: linear-gradient(90deg, rgba(245, 158, 11, 0.1) 0%, white 100%);
+}
+
+/* ROUGE - Wrong Match */
+.characteristic-card.match-wrong {
+  border-left-color: #ef4444;
+  background: linear-gradient(90deg, rgba(239, 68, 68, 0.1) 0%, white 100%);
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.75rem;
+}
+
+.card-label {
+  font-weight: 700;
+  color: #333;
+  font-size: 0.95rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.card-match-status {
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+}
+
+.card-match-status.match-exact {
+  background: #d1fae5;
+  color: #065f46;
+}
+
+.card-match-status.match-partial {
+  background: #fed7aa;
+  color: #92400e;
+}
+
+.card-match-status.match-wrong {
+  background: #fee2e2;
+  color: #7f1d1d;
+}
+
+.card-values {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin: 1rem 0;
+}
+
+.value-section {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.value-label {
+  font-size: 0.75rem;
+  color: #9ca3af;
+  text-transform: uppercase;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+}
+
+.value-text {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #333;
+  word-break: break-word;
+}
+
+.value-divider {
+  color: #d1d5db;
+  font-weight: 600;
+  min-width: 40px;
+  text-align: center;
+}
+
+.card-footer {
+  text-align: center;
+  font-size: 0.85rem;
+  color: #6b7280;
+  padding-top: 0.75rem;
+  border-top: 1px solid rgba(0, 0, 0, 0.05);
+  font-weight: 500;
+}
