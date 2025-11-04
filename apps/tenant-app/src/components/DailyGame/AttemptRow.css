@@ -1,50 +1,199 @@
-.attempt-row {
-  max-width: 800px;
-  margin: 2rem auto;
+.attempt-row-horizontal {
+  max-width: 100%;
+  width: 100%;
+  margin: 1.25rem 0;
   padding: 1.5rem;
   background: white;
-  border-radius: 1rem;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  animation: fadeIn 0.4s ease;
+  border-radius: 1.25rem;
+  box-shadow: var(--shadow-lg);
+  animation: fadeIn 0.5s ease;
+  border: 1px solid var(--gray-100);
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  from { 
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to { 
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-.attempt-header {
+.attempt-header-horizontal {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: center;
   margin-bottom: 1.5rem;
-  padding-bottom: 1rem;
-  border-bottom: 2px solid #e5e7eb;
+  padding-bottom: 1.25rem;
+  border-bottom: 2px solid var(--gray-100);
 }
 
-.attempt-number {
-  font-weight: 700;
-  color: #667eea;
-  font-size: 0.95rem;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-}
-
-.attempt-person-name {
-  font-size: 1.3rem;
-  font-weight: 700;
-  color: #333;
-}
-
-.attempt-cards {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+.attempt-info {
+  display: flex;
+  align-items: center;
   gap: 1rem;
 }
 
-/* Pour que les cartes s'empilent verticalement sur petits écrans */
-@media (max-width: 640px) {
-  .attempt-cards {
-    grid-template-columns: 1fr;
+.attempt-number {
+  font-weight: 800;
+  color: white;
+  font-size: 1.1rem;
+  background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+  padding: 0.65rem 1.15rem;
+  border-radius: 0.75rem;
+  min-width: 55px;
+  text-align: center;
+  box-shadow: 0 6px 16px rgba(99, 102, 241, 0.4);
+  letter-spacing: -0.3px;
+  font-feature-settings: 'zero' 1;
+  flex-shrink: 0;
+}
+
+.attempt-person-name {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--gray-900);
+  letter-spacing: -0.5px;
+  flex-shrink: 0;
+}
+
+/* GRILLE AVEC LARGEUR STRICTEMENT ÉGALE */
+.attempt-cards-horizontal {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 0.65rem;
+}
+
+/* Desktop large */
+@media (min-width: 1400px) {
+  .attempt-row-horizontal {
+    padding: 1.5rem;
+  }
+
+  .attempt-cards-horizontal {
+    grid-template-columns: repeat(6, 1fr);
+    gap: 0.75rem;
+  }
+}
+
+/* Desktop standard */
+@media (max-width: 1400px) and (min-width: 1025px) {
+  .attempt-row-horizontal {
+    padding: 1.3rem;
+  }
+
+  .attempt-cards-horizontal {
+    grid-template-columns: repeat(6, 1fr);
+    gap: 0.65rem;
+  }
+
+  .attempt-person-name {
+    font-size: 1.3rem;
+  }
+
+  .attempt-number {
+    font-size: 1rem;
+    padding: 0.6rem 1rem;
+    min-width: 50px;
+  }
+}
+
+/* Laptop */
+@media (max-width: 1024px) {
+  .attempt-row-horizontal {
+    padding: 1.2rem;
+    margin: 1rem 0;
+  }
+
+  .attempt-header-horizontal {
+    margin-bottom: 1.2rem;
+    padding-bottom: 1rem;
+  }
+
+  .attempt-cards-horizontal {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.6rem;
+  }
+
+  .attempt-number {
+    font-size: 0.95rem;
+    padding: 0.55rem 0.95rem;
+    min-width: 48px;
+  }
+
+  .attempt-person-name {
+    font-size: 1.2rem;
+  }
+}
+
+/* Tablette */
+@media (max-width: 768px) {
+  .attempt-row-horizontal {
+    margin: 1rem 0;
+    padding: 1rem;
+    border-radius: 1rem;
+  }
+
+  .attempt-header-horizontal {
+    margin-bottom: 1rem;
+    padding-bottom: 0.9rem;
+  }
+
+  .attempt-info {
+    gap: 0.875rem;
+  }
+
+  .attempt-cards-horizontal {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.55rem;
+  }
+
+  .attempt-number {
+    font-size: 0.9rem;
+    padding: 0.5rem 0.9rem;
+    min-width: 45px;
+  }
+
+  .attempt-person-name {
+    font-size: 1.1rem;
+  }
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+  .attempt-row-horizontal {
+    margin: 0.75rem 0;
+    padding: 0.875rem;
+    border-radius: 0.875rem;
+  }
+
+  .attempt-header-horizontal {
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 0.875rem;
+    padding-bottom: 0.875rem;
+    gap: 0.75rem;
+  }
+
+  .attempt-info {
+    width: 100%;
+    gap: 0.75rem;
+  }
+
+  .attempt-number {
+    font-size: 0.85rem;
+    padding: 0.45rem 0.85rem;
+    min-width: 42px;
+  }
+
+  .attempt-person-name {
+    font-size: 1rem;
+  }
+
+  .attempt-cards-horizontal {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.5rem;
   }
 }

@@ -1,9 +1,9 @@
 import { MATCH_TYPES } from '../../utils/comparisonLogic'
 import './CharacteristicCard.css'
 
-// Composant pour afficher une caractéristique avec code couleur
-function CharacteristicCard({ label, guessValue, targetValue, matchType, index }) {
-  // Déterminer les classe CSS selon le type de correspondance
+// Composant pour afficher une caractéristique avec code couleur (version horizontale)
+function CharacteristicCard({ label, guessValue, matchType, index }) {
+  // Déterminer la classe CSS selon le type de correspondance
   const getMatchClass = () => {
     switch (matchType) {
       case MATCH_TYPES.EXACT:
@@ -17,56 +17,29 @@ function CharacteristicCard({ label, guessValue, targetValue, matchType, index }
     }
   }
 
-  // Obtenir le texte descriptif du résultat
-  const getMatchText = () => {
-    switch (matchType) {
-      case MATCH_TYPES.EXACT:
-        return '✓ Exact'
-      case MATCH_TYPES.PARTIAL:
-        return '~ Proche'
-      case MATCH_TYPES.WRONG:
-        return '✗ Faux'
-      default:
-        return ''
-    }
-  }
-
-  // Animation d'apparition échelonnée (chaque carte apparaît après l'autre)
+  // Animation d'apparition échelonnée
   const animationDelay = index * 0.1
 
   return (
     <div 
-      className={`characteristic-card ${getMatchClass()}`}
+      className={`characteristic-card-horizontal ${getMatchClass()}`}
       style={{ animationDelay: `${animationDelay}s` }}
     >
-      {/* Haut de la carte : Label et statut */}
-      <div className="card-header">
+      {/* Label de la caractéristique */}
+      <div className="card-label-section">
         <span className="card-label">{label}</span>
-        <span className={`card-match-status match-${matchType}`}>
-          {getMatchText()}
-        </span>
       </div>
 
-      {/* Milieu de la carte : Valeurs */}
-      <div className="card-values">
-        <div className="value-section">
-          <span className="value-label">Votre choix</span>
-          <span className="value-text guess-value">{guessValue}</span>
-        </div>
-        
-        <div className="value-divider">vs</div>
-        
-        <div className="value-section">
-          <span className="value-label">À deviner</span>
-          <span className="value-text target-value">{targetValue}</span>
-        </div>
+      {/* Valeur avec le code couleur */}
+      <div className="card-value-section">
+        <span className="card-value">{guessValue}</span>
       </div>
 
-      {/* Bas de la carte : Message court */}
-      <div className="card-footer">
-        {matchType === MATCH_TYPES.EXACT && '🎯 C\'est bon !'}
-        {matchType === MATCH_TYPES.PARTIAL && '🔔 Proche mais pas exact'}
-        {matchType === MATCH_TYPES.WRONG && '❌ Recommence'}
+      {/* Indicateur de correspondance */}
+      <div className="card-indicator">
+        {matchType === MATCH_TYPES.EXACT && '✓'}
+        {matchType === MATCH_TYPES.PARTIAL && '~'}
+        {matchType === MATCH_TYPES.WRONG && '✗'}
       </div>
     </div>
   )

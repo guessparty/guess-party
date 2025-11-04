@@ -23,7 +23,7 @@ function GameStats({ stats }) {
           <div className="stat-label">Taux de victoire</div>
         </div>
 
-        {/* Série actuelle */}
+        {/* Série actuelle - CORRECTION ICI */}
         <div className="stat-card highlight">
           <div className="stat-value">
             🔥 {formatted.currentStreak}

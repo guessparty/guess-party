@@ -14,9 +14,8 @@ function ResultModal({ isOpen, isWin, person, attempts, score, onClose }) {
           <h2>{isWin ? '🎉 Bravo !' : '😔 Perdu...'}</h2>
         </div>
 
-        {/* Photo de la personne dévoilée */}
-        <div className="modal-person">
-          <img src={person.photo} alt={person.name} />
+        {/* Nom de la personne (sans photo) */}
+        <div className="modal-person-simple">
           <h3>{person.name}</h3>
         </div>
 
@@ -39,11 +38,11 @@ function ResultModal({ isOpen, isWin, person, attempts, score, onClose }) {
         </div>
 
         {/* Informations sur la personne */}
-        <div className="person-info">
-          <h4>À propos de {person.name}</h4>
-          <div className="info-grid">
+        <div className="person-info-simple">
+          <h4>Caractéristiques</h4>
+          <div className="info-grid-simple">
             {Object.entries(person.characteristics).map(([key, value]) => (
-              <div key={key} className="info-item">
+              <div key={key} className="info-item-simple">
                 <span className="info-value">{value}</span>
               </div>
             ))}

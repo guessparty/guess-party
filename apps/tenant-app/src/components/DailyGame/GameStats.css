@@ -1,58 +1,141 @@
 .game-stats {
-  max-width: 800px;
+  max-width: 1200px;
   margin: 3rem auto;
-  padding: 2rem;
+  padding: 2.5rem;
   background: white;
-  border-radius: 1rem;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  border-radius: 1.25rem;
+  box-shadow: var(--shadow-xl);
+  border-top: 4px solid var(--primary);
 }
 
 .game-stats h3 {
   text-align: center;
-  color: #333;
-  margin-bottom: 2rem;
-  font-size: 1.5rem;
+  color: var(--gray-900);
+  margin-bottom: 2.5rem;
+  font-size: 1.75rem;
+  font-weight: 800;
 }
 
 .stats-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 1.5rem;
 }
 
 .stat-card {
-  padding: 1.5rem;
-  background: #f9fafb;
-  border-radius: 0.75rem;
+  padding: 1.75rem;
+  background: linear-gradient(135deg, var(--gray-50) 0%, white 100%);
+  border-radius: 1rem;
   text-align: center;
-  border: 2px solid transparent;
-  transition: all 0.3s;
+  border: 2px solid var(--gray-100);
+  transition: var(--transition);
 }
 
 .stat-card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--primary);
 }
 
+/* HIGHLIGHT - Série actuelle */
 .stat-card.highlight {
   background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
-  border-color: #f59e0b;
+  border: 2px solid #f59e0b;
+  box-shadow: 0 8px 24px rgba(245, 158, 11, 0.2);
+}
+
+.stat-card.highlight:hover {
+  background: linear-gradient(135deg, #fde68a 0%, #fcd34d 100%);
+  border-color: #d97706;
+  box-shadow: 0 12px 32px rgba(245, 158, 11, 0.3);
 }
 
 .stat-value {
-  font-size: 2rem;
-  font-weight: bold;
-  color: #667eea;
-  margin-bottom: 0.5rem;
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: var(--primary);
+  margin-bottom: 0.75rem;
+  letter-spacing: -0.5px;
 }
 
+/* HIGHLIGHT stat-value en orange/jaune foncé */
 .stat-card.highlight .stat-value {
-  color: #d97706;
+  color: #b45309;
+  font-size: 2.8rem;
 }
 
 .stat-label {
-  font-size: 0.9rem;
-  color: #6b7280;
+  font-size: 0.85rem;
+  color: var(--gray-500);
   text-transform: uppercase;
   letter-spacing: 0.5px;
+  font-weight: 600;
+}
+
+/* HIGHLIGHT stat-label en marron foncé */
+.stat-card.highlight .stat-label {
+  color: #92400e;
+  font-weight: 700;
+}
+
+@media (max-width: 768px) {
+  .game-stats {
+    margin: 2rem auto;
+    padding: 1.5rem;
+  }
+
+  .game-stats h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .stats-grid {
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 1rem;
+  }
+
+  .stat-card {
+    padding: 1.25rem;
+  }
+
+  .stat-value {
+    font-size: 2rem;
+  }
+
+  .stat-card.highlight .stat-value {
+    font-size: 2.2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .game-stats {
+    margin: 1.5rem auto;
+    padding: 1.25rem;
+  }
+
+  .game-stats h3 {
+    font-size: 1.25rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.75rem;
+  }
+
+  .stat-card {
+    padding: 1rem;
+  }
+
+  .stat-value {
+    font-size: 1.75rem;
+  }
+
+  .stat-card.highlight .stat-value {
+    font-size: 1.95rem;
+  }
+
+  .stat-label {
+    font-size: 0.75rem;
+  }
 }

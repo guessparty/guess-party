@@ -61,24 +61,16 @@
   font-size: 2rem;
 }
 
-.modal-person {
+.modal-person-simple {
   padding: 2rem;
   text-align: center;
+  background: #f9fafb;
 }
 
-.modal-person img {
-  width: 200px;
-  height: 200px;
-  border-radius: 50%;
-  object-fit: cover;
-  margin-bottom: 1rem;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-}
-
-.modal-person h3 {
+.modal-person-simple h3 {
   margin: 0;
   color: #333;
-  font-size: 1.8rem;
+  font-size: 2rem;
 }
 
 .modal-details {
@@ -105,32 +97,34 @@
   font-weight: 600;
 }
 
-.person-info {
+.person-info-simple {
   padding: 0 2rem 2rem;
 }
 
-.person-info h4 {
+.person-info-simple h4 {
   text-align: center;
   color: #667eea;
   margin-bottom: 1rem;
 }
 
-.info-grid {
+.info-grid-simple {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 0.75rem;
+  gap: 1rem;
 }
 
-.info-item {
+.info-item-simple {
   background: #f9fafb;
-  padding: 0.75rem;
+  padding: 1rem;
   border-radius: 0.5rem;
   text-align: center;
+  border-left: 4px solid #667eea;
 }
 
 .info-value {
   font-weight: 500;
   color: #333;
+  display: block;
 }
 
 .close-button {

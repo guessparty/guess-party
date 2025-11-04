@@ -23,14 +23,20 @@ function AttemptsGrid({ attempts }) {
       </div>
       
       <div className="attempts-list">
-        {attempts.map((attempt, index) => (
-          <AttemptRow
-            key={index}
-            attemptNumber={index + 1}
-            personName={attempt.person.name}
-            comparisonResults={attempt.comparisonResults}
-          />
-        ))}
+        {/* Inverser l'ordre pour afficher la dernière tentative en premier */}
+        {attempts.slice().reverse().map((attempt, index) => {
+          // Calculer le vrai numéro (la dernière tentative = le plus grand numéro)
+          const attemptNumber = attempts.length - index
+          
+          return (
+            <AttemptRow
+              key={`attempt-${attemptNumber}`}
+              attemptNumber={attemptNumber}
+              personName={attempt.person.name}
+              comparisonResults={attempt.comparisonResults}
+            />
+          )
+        })}
       </div>
     </div>
   )

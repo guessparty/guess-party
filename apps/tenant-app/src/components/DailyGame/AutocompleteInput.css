@@ -1,6 +1,7 @@
 .autocomplete-container {
-  max-width: 600px;
-  margin: 0 auto 2rem;
+  max-width: 700px;
+  margin: 0 auto 3rem;
+  padding: 0 1rem;
 }
 
 .autocomplete-input-wrapper {
@@ -9,45 +10,70 @@
 
 .autocomplete-input {
   width: 100%;
-  padding: 1rem;
+  padding: 1.25rem 1.5rem;
   font-size: 1.1rem;
-  border: 2px solid #e5e7eb;
-  border-radius: 0.5rem;
-  transition: all 0.3s;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 500;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 1rem;
+  background: rgba(255, 255, 255, 0.95);
+  color: var(--gray-900);
+  transition: var(--transition);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+}
+
+.autocomplete-input::placeholder {
+  color: var(--gray-400);
 }
 
 .autocomplete-input:focus {
   outline: none;
-  border-color: #667eea;
-  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+  border-color: var(--primary);
+  background: white;
+  box-shadow: 0 12px 32px rgba(99, 102, 241, 0.2);
+  transform: translateY(-2px);
 }
 
 .autocomplete-input:disabled {
-  background: #f3f4f6;
+  background: var(--gray-100);
   cursor: not-allowed;
+  opacity: 0.6;
 }
 
 .autocomplete-dropdown {
   position: absolute;
-  top: 100%;
+  top: calc(100% + 0.5rem);
   left: 0;
   right: 0;
-  max-height: 300px;
+  max-height: 350px;
   overflow-y: auto;
   background: white;
-  border: 2px solid #667eea;
-  border-top: none;
-  border-radius: 0 0 0.5rem 0.5rem;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  border: none;
+  border-radius: 1rem;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
   z-index: 100;
-  margin-top: -2px;
+  animation: dropdownSlideDown 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes dropdownSlideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .dropdown-item {
-  padding: 1rem;
+  padding: 1rem 1.5rem;
   cursor: pointer;
-  transition: background 0.2s;
-  border-bottom: 1px solid #f3f4f6;
+  transition: var(--transition-fast);
+  border-bottom: 1px solid var(--gray-100);
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
 }
 
 .dropdown-item:last-child {
@@ -56,18 +82,41 @@
 
 .dropdown-item:hover,
 .dropdown-item.selected {
-  background: #f0f1ff;
+  background: var(--gray-50);
+  padding-left: 2rem;
+}
+
+.dropdown-item.selected {
+  background: rgba(99, 102, 241, 0.08);
+  border-left: 3px solid var(--primary);
+  padding-left: calc(1.5rem - 3px);
 }
 
 .person-name {
   font-size: 1rem;
-  color: #333;
-  font-weight: 500;
+  color: var(--gray-900);
+  font-weight: 600;
 }
 
 .autocomplete-hint {
   text-align: center;
-  margin-top: 0.5rem;
+  margin-top: 1rem;
   font-size: 0.9rem;
-  color: #6b7280;
+  color: rgba(255, 255, 255, 0.8);
+  font-weight: 500;
+}
+
+@media (max-width: 640px) {
+  .autocomplete-container {
+    margin-bottom: 2rem;
+  }
+
+  .autocomplete-input {
+    padding: 1rem 1.25rem;
+    font-size: 1rem;
+  }
+
+  .dropdown-item {
+    padding: 0.875rem 1.25rem;
+  }
 }
