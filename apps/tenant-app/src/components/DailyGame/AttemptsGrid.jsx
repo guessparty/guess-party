@@ -4,7 +4,7 @@ import './AttemptsGrid.css'
 // Composant pour afficher toutes les tentatives empilées
 function AttemptsGrid({ attempts }) {
   // Si pas de tentatives, afficher un message
-  if (attempts.length === 0) {
+  if (!attempts || attempts.length === 0) {
     return (
       <div className="attempts-grid-empty">
         <div className="empty-state">
@@ -28,12 +28,17 @@ function AttemptsGrid({ attempts }) {
           // Calculer le vrai numéro (la dernière tentative = le plus grand numéro)
           const attemptNumber = attempts.length - index
           
+          // Vérifier que les données existent avant de les afficher
+          if (!attempt || !attempt.name) {
+            return null
+          }
+
           return (
             <AttemptRow
               key={`attempt-${attemptNumber}`}
               attemptNumber={attemptNumber}
-              personName={attempt.person.name}
-              comparisonResults={attempt.comparisonResults}
+              personName={attempt.name}
+              comparisonResults={attempt.comparisonResults || {}}
             />
           )
         })}

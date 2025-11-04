@@ -1,141 +1,223 @@
 .game-stats {
-  max-width: 1200px;
-  margin: 3rem auto;
-  padding: 2.5rem;
-  background: white;
-  border-radius: 1.25rem;
-  box-shadow: var(--shadow-xl);
-  border-top: 4px solid var(--primary);
+  width: 100%;
 }
 
-.game-stats h3 {
+.stats-header {
   text-align: center;
+  margin-bottom: 2rem;
+}
+
+.stats-header h2 {
   color: var(--gray-900);
-  margin-bottom: 2.5rem;
-  font-size: 1.75rem;
+  font-size: 1.5rem;
+  margin: 0;
   font-weight: 800;
 }
 
 .stats-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-  gap: 1.5rem;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem;
 }
 
 .stat-card {
-  padding: 1.75rem;
-  background: linear-gradient(135deg, var(--gray-50) 0%, white 100%);
+  padding: 1.5rem;
   border-radius: 1rem;
   text-align: center;
-  border: 2px solid var(--gray-100);
   transition: var(--transition);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  border: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 130px;
 }
 
 .stat-card:hover {
-  transform: translateY(-8px);
-  box-shadow: var(--shadow-lg);
-  border-color: var(--primary);
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
 }
 
-/* HIGHLIGHT - Série actuelle */
-.stat-card.highlight {
-  background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
-  border: 2px solid #f59e0b;
-  box-shadow: 0 8px 24px rgba(245, 158, 11, 0.2);
+/* PRIMARY - Bleu */
+.stat-card.stat-primary {
+  background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+  border: 2px solid #3b82f6;
 }
 
-.stat-card.highlight:hover {
-  background: linear-gradient(135deg, #fde68a 0%, #fcd34d 100%);
-  border-color: #d97706;
-  box-shadow: 0 12px 32px rgba(245, 158, 11, 0.3);
+.stat-card.stat-primary .stat-value {
+  color: #1e40af;
+}
+
+.stat-card.stat-primary .stat-label {
+  color: #0c4a6e !important;
+}
+
+/* SUCCESS - Vert */
+.stat-card.stat-success {
+  background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%);
+  border: 2px solid #10b981;
+}
+
+.stat-card.stat-success .stat-value {
+  color: #065f46;
+}
+
+.stat-card.stat-success .stat-label {
+  color: #064e3b !important;
+}
+
+/* FLAME - Orange/Rouge */
+.stat-card.stat-flame {
+  background: linear-gradient(135deg, #fff7ed 0%, #fed7aa 100%);
+  border: 2px solid #f97316;
+}
+
+.stat-card.stat-flame .stat-value {
+  color: #92400e;
+}
+
+.stat-card.stat-flame .stat-label {
+  color: #7c2d12 !important;
+}
+
+/* STAR - Violet */
+.stat-card.stat-star {
+  background: linear-gradient(135deg, #f3e8ff 0%, #e9d5ff 100%);
+  border: 2px solid #a855f7;
+}
+
+.stat-card.stat-star .stat-value {
+  color: #581c87;
+}
+
+.stat-card.stat-star .stat-label {
+  color: #3f0f5c !important;
+}
+
+/* PERFECT - Rose */
+.stat-card.stat-perfect {
+  background: linear-gradient(135deg, #fce7f3 0%, #fbcfe8 100%);
+  border: 2px solid #ec4899;
+}
+
+.stat-card.stat-perfect .stat-value {
+  color: #831843;
+}
+
+.stat-card.stat-perfect .stat-label {
+  color: #500724 !important;
+}
+
+/* AVERAGE - Indigo */
+.stat-card.stat-average {
+  background: linear-gradient(135deg, #eef2ff 0%, #e0e7ff 100%);
+  border: 2px solid #6366f1;
+}
+
+.stat-card.stat-average .stat-value {
+  color: #312e81;
+}
+
+.stat-card.stat-average .stat-label {
+  color: #1e1b4b !important;
+}
+
+.stat-icon {
+  font-size: 1.75rem;
+  margin-bottom: 0.5rem;
 }
 
 .stat-value {
-  font-size: 2.5rem;
+  font-size: 2rem;
   font-weight: 800;
-  color: var(--primary);
-  margin-bottom: 0.75rem;
-  letter-spacing: -0.5px;
-}
-
-/* HIGHLIGHT stat-value en orange/jaune foncé */
-.stat-card.highlight .stat-value {
-  color: #b45309;
-  font-size: 2.8rem;
+  margin: 0.5rem 0;
 }
 
 .stat-label {
   font-size: 0.85rem;
-  color: var(--gray-500);
+  font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.5px;
-  font-weight: 600;
+  opacity: 1 !important;
 }
 
-/* HIGHLIGHT stat-label en marron foncé */
-.stat-card.highlight .stat-label {
-  color: #92400e;
-  font-weight: 700;
-}
-
-@media (max-width: 768px) {
-  .game-stats {
-    margin: 2rem auto;
-    padding: 1.5rem;
-  }
-
-  .game-stats h3 {
-    font-size: 1.5rem;
-    margin-bottom: 1.5rem;
-  }
-
+/* Responsive */
+@media (max-width: 1024px) {
   .stats-grid {
-    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    grid-template-columns: repeat(2, 1fr);
     gap: 1rem;
   }
 
   .stat-card {
+    min-height: 120px;
     padding: 1.25rem;
-  }
-
-  .stat-value {
-    font-size: 2rem;
-  }
-
-  .stat-card.highlight .stat-value {
-    font-size: 2.2rem;
-  }
-}
-
-@media (max-width: 480px) {
-  .game-stats {
-    margin: 1.5rem auto;
-    padding: 1.25rem;
-  }
-
-  .game-stats h3 {
-    font-size: 1.25rem;
-    margin-bottom: 1.25rem;
-  }
-
-  .stats-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 0.75rem;
-  }
-
-  .stat-card {
-    padding: 1rem;
   }
 
   .stat-value {
     font-size: 1.75rem;
   }
 
-  .stat-card.highlight .stat-value {
-    font-size: 1.95rem;
+  .stats-header h2 {
+    font-size: 1.3rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .stats-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.75rem;
+  }
+
+  .stat-card {
+    min-height: 110px;
+    padding: 1rem;
+  }
+
+  .stat-value {
+    font-size: 1.5rem;
   }
 
   .stat-label {
     font-size: 0.75rem;
+  }
+
+  .stat-icon {
+    font-size: 1.3rem;
+    margin-bottom: 0.25rem;
+  }
+
+  .stats-header h2 {
+    font-size: 1.2rem;
+    margin-bottom: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.6rem;
+  }
+
+  .stat-card {
+    min-height: 100px;
+    padding: 0.75rem;
+  }
+
+  .stat-value {
+    font-size: 1.3rem;
+  }
+
+  .stat-label {
+    font-size: 0.7rem;
+  }
+
+  .stat-icon {
+    font-size: 1.1rem;
+  }
+
+  .stats-header h2 {
+    font-size: 1rem;
+    margin-bottom: 1rem;
   }
 }

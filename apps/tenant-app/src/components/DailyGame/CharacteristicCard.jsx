@@ -7,13 +7,17 @@ function CharacteristicCard({ label, guessValue, matchType, index }) {
   const getMatchClass = () => {
     switch (matchType) {
       case MATCH_TYPES.EXACT:
+      case 'exact':
         return 'match-exact'  // Vert
       case MATCH_TYPES.PARTIAL:
+      case 'partial':
         return 'match-partial'  // Orange
       case MATCH_TYPES.WRONG:
+      case 'wrong':
+      case 'different':
         return 'match-wrong'  // Rouge
       default:
-        return ''
+        return 'match-wrong'
     }
   }
 
@@ -32,14 +36,14 @@ function CharacteristicCard({ label, guessValue, matchType, index }) {
 
       {/* Valeur avec le code couleur */}
       <div className="card-value-section">
-        <span className="card-value">{guessValue}</span>
+        <span className="card-value">{guessValue || '?'}</span>
       </div>
 
       {/* Indicateur de correspondance */}
       <div className="card-indicator">
-        {matchType === MATCH_TYPES.EXACT && '✓'}
-        {matchType === MATCH_TYPES.PARTIAL && '~'}
-        {matchType === MATCH_TYPES.WRONG && '✗'}
+        {(matchType === MATCH_TYPES.EXACT || matchType === 'exact') && '✓'}
+        {(matchType === MATCH_TYPES.PARTIAL || matchType === 'partial') && '~'}
+        {(matchType === MATCH_TYPES.WRONG || matchType === 'wrong' || matchType === 'different') && '✗'}
       </div>
     </div>
   )

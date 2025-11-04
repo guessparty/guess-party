@@ -163,11 +163,17 @@
 
 /* Mobile */
 @media (max-width: 480px) {
-  .attempt-row-horizontal {
-    margin: 0.75rem 0;
-    padding: 0.875rem;
-    border-radius: 0.875rem;
-  }
+.attempt-row-horizontal {
+  max-width: 100%;
+  width: 100%;
+  margin: 1.25rem 0;
+  padding: 1.5rem;
+  background: white;
+  border-radius: 1.25rem;
+  box-shadow: var(--shadow-lg);
+  animation: fadeIn 0.5s ease;
+  border: 1px solid var(--gray-100);
+}
 
   .attempt-header-horizontal {
     flex-direction: column;
