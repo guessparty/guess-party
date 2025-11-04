@@ -13,10 +13,24 @@ function GameStats() {
     firstTryPercentage: 0
   })
 
-  useEffect(() => {
+  // Charger les stats depuis localStorage
+  const loadStats = () => {
     const statsStr = localStorage.getItem('guess-party-stats')
     if (statsStr) {
       setStats(JSON.parse(statsStr))
+    }
+  }
+
+  useEffect(() => {
+    // Charger les stats au mount
+    loadStats()
+
+    // 🚀 Écouter l'événement de mise à jour
+    window.addEventListener('statsUpdated', loadStats)
+
+    // Cleanup
+    return () => {
+      window.removeEventListener('statsUpdated', loadStats)
     }
   }, [])
 

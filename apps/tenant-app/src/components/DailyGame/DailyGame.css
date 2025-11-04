@@ -5,7 +5,6 @@
 }
 
 .game-header {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   box-shadow: 0 4px 16px rgba(99, 102, 241, 0.3);
   padding: 1.5rem 2rem;
   display: flex;
@@ -15,6 +14,15 @@
   position: sticky;
   top: 0;
   z-index: 50;
+}
+
+/* Headers distincts */
+.game-header-daily {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+}
+
+.game-header-marathon {
+  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%) !important;
 }
 
 .back-btn {
@@ -142,7 +150,7 @@
 .result-header h2 {
   font-size: 2.2rem;
   margin: 0.5rem 0;
-  color: var(--gray-900);
+  color: var(--gray-900) !important;
   font-weight: 800;
   animation: popIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) 0.2s both;
 }
@@ -160,7 +168,7 @@
 
 .result-header p {
   font-size: 1.05rem;
-  color: var(--gray-600);
+  color: var(--gray-600) !important;
   margin: 0.75rem 0 0;
   animation: fadeInUp 0.5s ease 0.3s both;
 }
@@ -188,7 +196,7 @@
 
 .result-person h3 {
   font-size: 1.8rem;
-  color: var(--primary);
+  color: #667eea !important;
   margin: 0 0 1.5rem;
   font-weight: 800;
 }
@@ -225,37 +233,37 @@
 
 .detail-label {
   font-size: 0.75rem;
-  font-weight: 700;
+  font-weight: 700 !important;
   text-transform: uppercase;
   letter-spacing: 0.5px;
-  color: var(--gray-500);
+  color: var(--gray-500) !important;
 }
 
 .detail-value {
   font-size: 1rem;
-  font-weight: 700;
-  color: var(--primary);
+  font-weight: 700 !important;
+  color: #667eea !important;
 }
 
 .result-btn {
   width: 100%;
   padding: 1.2rem;
-  background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
-  color: white;
-  border: none;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+  color: white !important;
+  border: none !important;
   border-radius: 0.75rem;
-  font-weight: 700;
+  font-weight: 700 !important;
   font-size: 1.05rem;
   cursor: pointer;
   transition: var(--transition);
   font-family: 'Poppins', sans-serif;
   animation: fadeInUp 0.5s ease 0.8s both;
-  box-shadow: 0 8px 20px rgba(99, 102, 241, 0.3);
+  box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3);
 }
 
 .result-btn:hover {
   transform: translateY(-3px);
-  box-shadow: 0 12px 30px rgba(99, 102, 241, 0.4);
+  box-shadow: 0 12px 30px rgba(102, 126, 234, 0.4);
 }
 
 .result-btn:active {
@@ -289,7 +297,7 @@
 .btn-admin {
   padding: 0.75rem 1.5rem;
   background: white;
-  color: var(--primary);
+  color: #667eea;
   border: none;
   border-radius: 0.5rem;
   font-weight: 700;
@@ -319,7 +327,7 @@
 
 .btn-back:hover {
   background: white;
-  color: var(--primary);
+  color: #667eea;
 }
 
 /* Loading */

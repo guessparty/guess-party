@@ -104,48 +104,57 @@ function DailyGame() {
     }
   }
 
-  const updateStats = (isWin, totalAttempts) => {
-    const statsStr = localStorage.getItem('guess-party-stats')
-    const stats = statsStr ? JSON.parse(statsStr) : {
-      totalGames: 0,
-      gamesWon: 0,
-      currentStreak: 0,
-      maxStreak: 0,
-      totalAttempts: 0,
-      firstTryWins: 0,
-      lastPlayedDate: null,
-      averageAttempts: 0,
-      firstTryPercentage: 0
-    }
+const updateStats = (isWin, totalAttempts) => {
+  const statsStr = localStorage.getItem('guess-party-stats')
+  const stats = statsStr ? JSON.parse(statsStr) : {
+    totalGames: 0,
+    gamesWon: 0,
+    currentStreak: 0,
+    maxStreak: 0,
+    totalAttempts: 0,
+    firstTryWins: 0,
+    lastPlayedDate: null,
+    averageAttempts: 0,
+    firstTryPercentage: 0
+  }
 
-    const today = new Date().toDateString()
-    const lastPlayed = stats.lastPlayedDate === today
+  const today = new Date().toDateString()
+  const lastPlayed = stats.lastPlayedDate === today
 
-    if (!lastPlayed) {
-      stats.totalGames += 1
+  if (!lastPlayed) {
+    stats.totalGames += 1
 
-      if (isWin) {
-        stats.gamesWon += 1
-        stats.currentStreak += 1
-        stats.totalAttempts += totalAttempts
+    if (isWin) {
+      stats.gamesWon += 1
+      stats.currentStreak += 1
+      stats.totalAttempts += totalAttempts
 
-        if (totalAttempts === 1) {
-          stats.firstTryWins += 1
-        }
-
-        if (stats.currentStreak > stats.maxStreak) {
-          stats.maxStreak = stats.currentStreak
-        }
-      } else {
-        stats.currentStreak = 0
+      if (totalAttempts === 1) {
+        stats.firstTryWins += 1
       }
 
-      stats.lastPlayedDate = today
-      stats.averageAttempts = stats.gamesWon > 0 ? (stats.totalAttempts / stats.gamesWon).toFixed(1) : 0
-      stats.firstTryPercentage = stats.gamesWon > 0 ? ((stats.firstTryWins / stats.gamesWon) * 100).toFixed(0) : 0
-
-      localStorage.setItem('guess-party-stats', JSON.stringify(stats))
+      if (stats.currentStreak > stats.maxStreak) {
+        stats.maxStreak = stats.currentStreak
+      }
+    } else {
+      stats.currentStreak = 0
     }
+
+    stats.lastPlayedDate = today
+    stats.averageAttempts = stats.gamesWon > 0 ? (stats.totalAttempts / stats.gamesWon).toFixed(1) : 0
+    stats.firstTryPercentage = stats.gamesWon > 0 ? ((stats.firstTryWins / stats.gamesWon) * 100).toFixed(0) : 0
+
+    localStorage.setItem('guess-party-stats', JSON.stringify(stats))
+    
+    // 🚀 Déclencher un événement pour mettre à jour GameStats
+    window.dispatchEvent(new Event('statsUpdated'))
+  }
+}
+
+
+  // Fermer le modal sans naviguer
+  const closeResultModal = () => {
+    setShowResult(false)
   }
 
   if (loading) {
@@ -177,7 +186,7 @@ function DailyGame() {
 
   return (
     <div className="daily-game">
-      <div className="game-header">
+      <div className="game-header game-header-daily">
         <button className="back-btn" onClick={() => navigate('/')}>
           ← Retour
         </button>
@@ -192,12 +201,13 @@ function DailyGame() {
             onGuess={handleGuess}
             disabled={won || lost || attempts.length >= 6}
             attemptsLeft={6 - attempts.length}
+            attempts={attempts}
           />
 
           <AttemptsGrid attempts={attempts} />
 
           {showResult && (
-            <div className="result-modal-overlay" onClick={() => navigate('/')}>
+            <div className="result-modal-overlay" onClick={closeResultModal}>
               <div className="result-modal" onClick={(e) => e.stopPropagation()}>
                 <div className="result-header">
                   {won ? (
@@ -213,42 +223,42 @@ function DailyGame() {
                   )}
                 </div>
                 <div className="result-person">
-                      <h3>{todayPerson.name}</h3>
-                      <div className="person-info-grid">
-                        <div className="person-detail">
-                          <span className="detail-icon">📍</span>
-                          <span className="detail-label">Ville</span>
-                          <span className="detail-value">{todayPerson.city}</span>
-                        </div>
-                        <div className="person-detail">
-                          <span className="detail-icon">💼</span>
-                          <span className="detail-label">Métier</span>
-                          <span className="detail-value">{todayPerson.job}</span>
-                        </div>
-                        <div className="person-detail">
-                          <span className="detail-icon">🎯</span>
-                          <span className="detail-label">Loisir</span>
-                          <span className="detail-value">{todayPerson.hobby}</span>
-                        </div>
-                        <div className="person-detail">
-                          <span className="detail-icon">🎨</span>
-                          <span className="detail-label">Couleur</span>
-                          <span className="detail-value">{todayPerson.color}</span>
-                        </div>
-                        <div className="person-detail">
-                          <span className="detail-icon">🎂</span>
-                          <span className="detail-label">Âge</span>
-                          <span className="detail-value">{todayPerson.age}</span>
-                        </div>
-                        <div className="person-detail">
-                          <span className="detail-icon">👥</span>
-                          <span className="detail-label">Relation</span>
-                          <span className="detail-value">{todayPerson.relation}</span>
-                        </div>
-                      </div>
+                  <h3>{todayPerson.name}</h3>
+                  <div className="person-info-grid">
+                    <div className="person-detail">
+                      <span className="detail-icon">📍</span>
+                      <span className="detail-label">Ville</span>
+                      <span className="detail-value">{todayPerson.city}</span>
                     </div>
-                <button onClick={() => navigate('/')} className="result-btn">
-                  ← Retour
+                    <div className="person-detail">
+                      <span className="detail-icon">💼</span>
+                      <span className="detail-label">Métier</span>
+                      <span className="detail-value">{todayPerson.job}</span>
+                    </div>
+                    <div className="person-detail">
+                      <span className="detail-icon">🎯</span>
+                      <span className="detail-label">Loisir</span>
+                      <span className="detail-value">{todayPerson.hobby}</span>
+                    </div>
+                    <div className="person-detail">
+                      <span className="detail-icon">🎨</span>
+                      <span className="detail-label">Couleur</span>
+                      <span className="detail-value">{todayPerson.color}</span>
+                    </div>
+                    <div className="person-detail">
+                      <span className="detail-icon">🎂</span>
+                      <span className="detail-label">Âge</span>
+                      <span className="detail-value">{todayPerson.age}</span>
+                    </div>
+                    <div className="person-detail">
+                      <span className="detail-icon">👥</span>
+                      <span className="detail-label">Relation</span>
+                      <span className="detail-value">{todayPerson.relation}</span>
+                    </div>
+                  </div>
+                </div>
+                <button onClick={closeResultModal} className="result-btn">
+                  ← Fermer
                 </button>
               </div>
             </div>

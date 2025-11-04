@@ -14,7 +14,7 @@ function Header() {
         </div>
         
         <nav className="header-nav">
-          <button className="nav-link nav-link-secondary" onClick={() => navigate('/game')}>
+          <button className="nav-link nav-link-secondary" onClick={() => navigate('/daily')}>
             Démarrer
           </button>
         </nav>

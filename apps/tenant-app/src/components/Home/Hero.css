@@ -45,6 +45,7 @@
   align-items: center;
   position: relative;
   z-index: 1;
+  width: 100%;
 }
 
 .hero-text {
@@ -53,7 +54,7 @@
 
 .hero-subtitle {
   font-size: 1.2rem;
-  color: rgba(255, 255, 255, 0.8);
+  color: rgba(255, 255, 255, 0.9) !important;
   margin: 0 0 0.5rem;
   font-weight: 500;
   letter-spacing: 1px;
@@ -66,6 +67,7 @@
   margin: 0 0 1.5rem;
   letter-spacing: -1px;
   line-height: 1.1;
+  color: white !important;
 }
 
 .hero-description {
@@ -73,11 +75,12 @@
   margin: 0 0 1rem;
   line-height: 1.5;
   font-weight: 600;
+  color: white !important;
 }
 
 .hero-subtext {
   font-size: 1.1rem;
-  color: rgba(255, 255, 255, 0.9);
+  color: rgba(255, 255, 255, 0.95) !important;
   margin: 0 0 2.5rem;
   line-height: 1.6;
 }
@@ -86,6 +89,7 @@
   display: flex;
   gap: 1rem;
   margin-bottom: 3rem;
+  flex-wrap: wrap;
 }
 
 .btn {
@@ -97,27 +101,30 @@
   cursor: pointer;
   transition: var(--transition);
   box-shadow: var(--shadow-lg);
+  font-family: 'Poppins', sans-serif;
 }
 
 .btn-primary {
-  background: white;
-  color: var(--primary);
+  background: white !important;
+  color: #667eea !important;
+  border: 2px solid white !important;
 }
 
 .btn-primary:hover {
   transform: translateY(-4px);
   box-shadow: 0 16px 40px rgba(0, 0, 0, 0.2);
+  background: rgba(255, 255, 255, 0.95) !important;
 }
 
 .btn-secondary {
-  background: transparent;
-  color: white;
-  border: 2px solid white;
+  background: transparent !important;
+  color: white !important;
+  border: 2px solid white !important;
 }
 
 .btn-secondary:hover {
-  background: white;
-  color: var(--primary);
+  background: white !important;
+  color: #667eea !important;
   transform: translateY(-4px);
 }
 
@@ -135,11 +142,12 @@
 .stat-number {
   font-size: 1.8rem;
   font-weight: 800;
+  color: white !important;
 }
 
 .stat-label {
   font-size: 0.9rem;
-  color: white !important;
+  color: rgba(255, 255, 255, 0.95) !important;
   text-transform: uppercase;
   letter-spacing: 0.5px;
   font-weight: 600;
@@ -193,7 +201,7 @@
 .card-text {
   font-size: 1.8rem;
   font-weight: 700;
-  color: var(--primary);
+  color: #667eea !important;
 }
 
 @media (max-width: 1024px) {
@@ -217,6 +225,10 @@
 
   .hero-buttons {
     flex-direction: column;
+  }
+
+  .btn {
+    width: 100%;
   }
 }
 
@@ -245,5 +257,10 @@
   .btn {
     padding: 0.8rem 1.5rem;
     font-size: 1rem;
+  }
+
+  .hero-buttons {
+    flex-direction: column;
+    gap: 0.75rem;
   }
 }

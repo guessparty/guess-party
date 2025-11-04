@@ -12,7 +12,7 @@ function GameModes() {
       description: 'Un nouveau défi chaque jour. Devinez avec le moins de tentatives possible !',
       features: ['1 énigme par jour', 'Indices progressifs', 'Statistiques'],
       color: 'green',
-      action: () => navigate('/game/daily')
+      action: () => navigate('/daily')
     },
     {
       id: 'collection',
@@ -30,7 +30,7 @@ function GameModes() {
       description: 'Devinez toutes les personnes sans limite. Testez vos limites !',
       features: ['Sans limite', 'Classement', 'Défi personnel'],
       color: 'red',
-      comingSoon: true
+      action: () => navigate('/marathon')
     }
   ]
 
@@ -61,7 +61,7 @@ function GameModes() {
                 </div>
               ) : (
                 <button className="btn btn-mode" onClick={mode.action}>
-                  Démarrer
+                  🚀 Démarrer
                 </button>
               )}
             </div>

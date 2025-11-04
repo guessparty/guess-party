@@ -2,6 +2,7 @@
   max-width: 1400px;
   margin: 0 auto;
   padding: 6rem 2rem;
+  background: white;
 }
 
 .modes-header {
@@ -11,14 +12,14 @@
 
 .modes-header h2 {
   font-size: 2.8rem;
-  color: var(--gray-900);
+  color: var(--gray-900) !important;
   margin: 0 0 1rem;
   font-weight: 800;
 }
 
 .modes-header p {
   font-size: 1.2rem;
-  color: var(--gray-500);
+  color: var(--gray-500) !important;
   margin: 0;
 }
 
@@ -44,18 +45,20 @@
 
 .mode-green {
   border-top-color: #10b981;
+  opacity: 1 !important;
+  pointer-events: auto !important;
 }
 
 .mode-blue {
   border-top-color: #3b82f6;
-  opacity: 0.7;
-  pointer-events: none;
+  opacity: 0.6 !important;
+  pointer-events: none !important;
 }
 
 .mode-red {
   border-top-color: #ef4444;
-  opacity: 0.7;
-  pointer-events: none;
+  opacity: 1 !important;
+  pointer-events: auto !important;
 }
 
 .mode-card-inner {
@@ -72,14 +75,14 @@
 
 .mode-title {
   font-size: 1.5rem;
-  color: var(--gray-900);
+  color: var(--gray-900) !important;
   margin: 0;
   font-weight: 700;
 }
 
 .mode-description {
   font-size: 1rem;
-  color: var(--gray-600);
+  color: var(--gray-600) !important;
   margin: 0;
   line-height: 1.6;
 }
@@ -95,7 +98,7 @@
 
 .mode-features li {
   font-size: 0.95rem;
-  color: var(--gray-600);
+  color: var(--gray-600) !important;
   font-weight: 500;
 }
 
@@ -108,11 +111,12 @@
   cursor: pointer;
   transition: var(--transition);
   margin-top: auto;
+  font-family: 'Poppins', sans-serif;
 }
 
 .mode-green .btn-mode {
-  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
-  color: white;
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%) !important;
+  color: white !important;
 }
 
 .mode-green .btn-mode:hover {
@@ -120,12 +124,32 @@
   box-shadow: 0 8px 20px rgba(16, 185, 129, 0.3);
 }
 
+.mode-blue .btn-mode {
+  background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%) !important;
+  color: white !important;
+}
+
+.mode-blue .btn-mode:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 20px rgba(59, 130, 246, 0.3);
+}
+
+.mode-red .btn-mode {
+  background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%) !important;
+  color: white !important;
+}
+
+.mode-red .btn-mode:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 20px rgba(239, 68, 68, 0.3);
+}
+
 .coming-soon {
   padding: 1rem;
   text-align: center;
-  background: var(--gray-100);
+  background: var(--gray-100) !important;
   border-radius: 0.75rem;
-  color: var(--gray-500);
+  color: var(--gray-500) !important;
   font-weight: 600;
   font-size: 0.95rem;
   margin-top: auto;

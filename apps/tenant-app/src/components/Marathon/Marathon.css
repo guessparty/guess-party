@@ -1,0 +1,768 @@
+.marathon {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+  padding-bottom: 2rem;
+}
+
+.game-header {
+  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+  box-shadow: 0 4px 16px rgba(245, 87, 108, 0.3);
+  padding: 1.5rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 3px solid rgba(255, 255, 255, 0.3);
+  position: sticky;
+  top: 0;
+  z-index: 50;
+}
+
+.back-btn {
+  background: rgba(255, 255, 255, 0.2);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  color: white;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  font-family: 'Poppins', sans-serif;
+}
+
+.back-btn:hover {
+  background: rgba(255, 255, 255, 0.3);
+  border-color: rgba(255, 255, 255, 0.5);
+  transform: translateY(-2px);
+}
+
+.game-header h1 {
+  font-size: 1.5rem;
+  color: white;
+  margin: 0;
+  font-weight: 800;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.header-spacer {
+  width: 50px;
+}
+
+.game-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.marathon-progress {
+  background: white;
+  border-radius: 1rem;
+  padding: 2rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  animation: slideInDown 0.5s ease;
+}
+
+@keyframes slideInDown {
+  from {
+    transform: translateY(-30px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.progress-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.progress-text {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--gray-900);
+}
+
+.attempts-text {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #f5576c;
+}
+
+.progress-bar {
+  width: 100%;
+  height: 8px;
+  background: var(--gray-200);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #f093fb 0%, #f5576c 100%);
+  transition: width 0.3s ease;
+}
+
+.marathon-main {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 2rem;
+}
+
+.challenge-section {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.challenge-card {
+  background: white;
+  border-radius: 1.25rem;
+  padding: 2rem;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+}
+
+.challenge-card h2 {
+  font-size: 1.8rem;
+  color: var(--gray-900);
+  margin: 0 0 2rem;
+  font-weight: 800;
+}
+
+.attempt-feedback {
+  background: white;
+  border-radius: 1.25rem;
+  padding: 2rem;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  animation: slideInUp 0.5s ease;
+}
+
+@keyframes slideInUp {
+  from {
+    transform: translateY(30px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.attempt-feedback h3 {
+  font-size: 1.2rem;
+  color: var(--gray-900);
+  margin: 0 0 1.5rem;
+  font-weight: 700;
+}
+
+.attempts-history {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  max-height: 600px;
+  overflow-y: auto;
+  padding: 1rem;
+}
+
+.attempt-item {
+  border: 2px solid var(--gray-200);
+  border-radius: 1rem;
+  padding: 1.5rem;
+  background: var(--gray-50);
+  animation: slideInUp 0.5s ease;
+}
+
+.attempt-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid var(--gray-200);
+}
+
+.attempt-number {
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--gray-600);
+}
+
+.attempt-name {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--gray-900);
+}
+
+.characteristics-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}
+
+.guessed-list {
+  background: white;
+  border-radius: 1.25rem;
+  padding: 2rem;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  max-height: 600px;
+  overflow-y: auto;
+}
+
+.guessed-list h3 {
+  font-size: 1.2rem;
+  color: var(--gray-900);
+  margin: 0 0 1.5rem;
+  font-weight: 700;
+}
+
+.guessed-items {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.guessed-person-card {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+  color: white;
+  padding: 1rem;
+  border-radius: 0.75rem;
+  font-weight: 600;
+  animation: slideInLeft 0.3s ease forwards;
+}
+
+@keyframes slideInLeft {
+  from {
+    transform: translateX(-20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.gp-number {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.gp-name {
+  flex: 1;
+}
+
+/* Game Over Modal */
+.game-over-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  animation: fadeInOverlay 0.3s ease;
+}
+
+@keyframes fadeInOverlay {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.game-over-modal {
+  background: white;
+  border-radius: 1.5rem;
+  padding: 2.5rem;
+  max-width: 700px;
+  width: 90%;
+  box-shadow: 0 25px 80px rgba(0, 0, 0, 0.4);
+  animation: slideUpModal 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+  position: relative;
+  overflow: hidden;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.game-over-modal::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 6px;
+  background: linear-gradient(90deg, #f093fb 0%, #f5576c 100%);
+}
+
+@keyframes slideUpModal {
+  from {
+    transform: translateY(60px) scale(0.85);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+}
+
+.game-over-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.game-over-header h2 {
+  font-size: 2rem;
+  color: var(--gray-900);
+  margin: 0 0 0.5rem;
+  font-weight: 800;
+  animation: popIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) 0.2s both;
+}
+
+.game-over-header p {
+  color: var(--gray-600);
+  font-size: 1.1rem;
+  animation: fadeInUp 0.5s ease 0.3s both;
+}
+
+@keyframes popIn {
+  from {
+    transform: scale(0.5);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    transform: translateY(10px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.game-over-stats {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+  animation: fadeInUp 0.5s ease 0.4s both;
+}
+
+.go-stat {
+  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+  color: white;
+  padding: 1.5rem;
+  border-radius: 1rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.go-label {
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  opacity: 0.9;
+}
+
+.go-value {
+  font-size: 2.5rem;
+  font-weight: 800;
+}
+
+.name-input-section {
+  background: var(--gray-50);
+  border-radius: 1rem;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+  animation: fadeInUp 0.5s ease 0.5s both;
+}
+
+.name-input-section h3 {
+  margin: 0 0 1rem;
+  color: var(--gray-900);
+  font-weight: 700;
+}
+
+.name-input-group {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.name-input {
+  flex: 1;
+  padding: 0.75rem;
+  border: 2px solid #f5576c;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  font-family: 'Poppins', sans-serif;
+}
+
+.name-input:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(245, 87, 108, 0.2);
+}
+
+.btn-submit-score {
+  padding: 0.75rem 1.5rem;
+  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+  color: white;
+  border: none;
+  border-radius: 0.5rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: var(--transition);
+  font-family: 'Poppins', sans-serif;
+}
+
+.btn-submit-score:hover {
+  transform: translateY(-2px);
+}
+
+.game-over-guessed {
+  background: var(--gray-50);
+  border-radius: 1rem;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+  animation: fadeInUp 0.5s ease 0.5s both;
+  max-height: 250px;
+  overflow-y: auto;
+}
+
+.game-over-guessed h3 {
+  margin: 0 0 1rem;
+  color: var(--gray-900);
+  font-weight: 700;
+}
+
+.guessed-cards-list {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.75rem;
+}
+
+.person-card-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+  color: white;
+  padding: 0.75rem;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  animation: fadeInUp 0.4s ease forwards;
+}
+
+.pc-number {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  font-weight: 700;
+  flex-shrink: 0;
+  font-size: 0.85rem;
+}
+
+.pc-name {
+  flex: 1;
+  font-size: 0.9rem;
+}
+
+.game-over-buttons {
+  display: flex;
+  gap: 1rem;
+  animation: fadeInUp 0.5s ease 0.6s both;
+}
+
+.btn-play-again,
+.btn-leaderboard,
+.btn-home {
+  flex: 1;
+  padding: 1rem;
+  border: none;
+  border-radius: 0.75rem;
+  font-weight: 700;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: var(--transition);
+  font-family: 'Poppins', sans-serif;
+}
+
+.btn-play-again {
+  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+  color: white;
+  box-shadow: 0 8px 20px rgba(245, 87, 108, 0.3);
+}
+
+.btn-play-again:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 30px rgba(245, 87, 108, 0.4);
+}
+
+.btn-leaderboard {
+  background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+  color: white;
+  box-shadow: 0 8px 20px rgba(255, 215, 0, 0.3);
+}
+
+.btn-leaderboard:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 30px rgba(255, 215, 0, 0.4);
+}
+
+.btn-home {
+  background: var(--gray-200);
+  color: var(--gray-900);
+}
+
+.btn-home:hover {
+  background: var(--gray-300);
+  transform: translateY(-3px);
+}
+
+.error-state {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 2rem;
+}
+
+.error-state h2 {
+  font-size: 2rem;
+  color: white;
+  margin-bottom: 1rem;
+  font-weight: 800;
+}
+
+.error-state p {
+  font-size: 1.1rem;
+  color: rgba(255, 255, 255, 0.9);
+  margin-bottom: 2rem;
+}
+
+.btn-admin {
+  padding: 0.75rem 1.5rem;
+  background: white;
+  color: #f5576c;
+  border: none;
+  border-radius: 0.5rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: var(--transition);
+  margin: 0.5rem;
+  font-family: 'Poppins', sans-serif;
+}
+
+.btn-admin:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+}
+
+.loading {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  color: white;
+}
+
+/* Responsive */
+@media (max-width: 1200px) {
+  .characteristics-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 1024px) {
+  .marathon-main {
+    grid-template-columns: 1fr;
+  }
+
+  .guessed-list {
+    max-height: 300px;
+  }
+
+  .characteristics-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .game-header {
+    padding: 0.75rem 1rem;
+  }
+
+  .game-header h1 {
+    font-size: 1.2rem;
+  }
+
+  .game-container {
+    padding: 1rem;
+    gap: 1.5rem;
+  }
+
+  .marathon-progress {
+    padding: 1.5rem;
+  }
+
+  .challenge-card {
+    padding: 1.5rem;
+  }
+
+  .challenge-card h2 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .attempt-feedback {
+    padding: 1.5rem;
+  }
+
+  .guessed-list {
+    padding: 1.5rem;
+    max-height: 300px;
+  }
+
+  .game-over-modal {
+    padding: 2rem;
+  }
+
+  .game-over-header h2 {
+    font-size: 1.5rem;
+  }
+
+  .guessed-cards-list {
+    grid-template-columns: 1fr;
+  }
+
+  .characteristics-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.75rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .game-header {
+    padding: 0.5rem 0.75rem;
+  }
+
+  .game-header h1 {
+    font-size: 1rem;
+  }
+
+  .game-container {
+    padding: 0.75rem;
+    gap: 1rem;
+  }
+
+  .marathon-progress {
+    padding: 1rem;
+  }
+
+  .progress-info {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .challenge-card {
+    padding: 1rem;
+  }
+
+  .challenge-card h2 {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+  }
+
+  .attempt-feedback {
+    padding: 1rem;
+  }
+
+  .attempt-feedback h3 {
+    font-size: 1rem;
+  }
+
+  .attempts-history {
+    max-height: 400px;
+    padding: 0.5rem;
+  }
+
+  .attempt-item {
+    padding: 1rem;
+  }
+
+  .guessed-list {
+    padding: 1rem;
+    max-height: 200px;
+  }
+
+  .guessed-list h3 {
+    font-size: 1rem;
+  }
+
+  .game-over-modal {
+    width: 95%;
+    padding: 1.5rem;
+  }
+
+  .game-over-header h2 {
+    font-size: 1.3rem;
+  }
+
+  .game-over-stats {
+    grid-template-columns: 1fr;
+  }
+
+  .game-over-buttons {
+    flex-direction: column;
+  }
+
+  .btn-play-again,
+  .btn-leaderboard,
+  .btn-home {
+    width: 100%;
+  }
+
+  .characteristics-grid {
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+  }
+
+  .guessed-cards-list {
+    grid-template-columns: 1fr;
+  }
+}

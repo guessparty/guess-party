@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import './GuessInput.css'
 
 // Composant pour saisir une réponse avec autocomplétion
-function GuessInput({ persons = [], onGuess, disabled, attemptsLeft = 6 }) {
+function GuessInput({ persons = [], onGuess, disabled, attemptsLeft = 6, attempts = [] }) {
   const [guess, setGuess] = useState('')
   const [suggestions, setSuggestions] = useState([])
   const [selectedIndex, setSelectedIndex] = useState(-1)
@@ -18,15 +18,20 @@ function GuessInput({ persons = [], onGuess, disabled, attemptsLeft = 6 }) {
     }
 
     const searchTerm = guess.toLowerCase()
-    // Filtrer par première lettre
+    
+    // ✅ Obtenir les IDs des personnes déjà devinées
+    const guessedIds = attempts.map(attempt => attempt.id)
+    
+    // Filtrer par première lettre ET exclure les doublons
     const filtered = persons.filter(person => 
-      person.name.toLowerCase().startsWith(searchTerm)
+      person.name.toLowerCase().startsWith(searchTerm) &&
+      !guessedIds.includes(person.id) // ✅ Bloquer les doublons
     )
 
     setSuggestions(filtered)
     setShowSuggestions(filtered.length > 0)
     setSelectedIndex(-1)
-  }, [guess, persons])
+  }, [guess, persons, attempts])
 
   // Fonction appelée quand on soumet le formulaire
   const handleSubmit = (e) => {
@@ -47,6 +52,14 @@ function GuessInput({ persons = [], onGuess, disabled, attemptsLeft = 6 }) {
       return
     }
 
+    // ✅ Vérifier si la personne a déjà été devinée
+    const alreadyGuessed = attempts.some(attempt => attempt.id === foundPerson.id)
+    if (alreadyGuessed) {
+      alert('❌ Vous avez déjà deviné cette personne !')
+      setGuess('')
+      return
+    }
+
     // Appeler la fonction du parent avec la personne trouvée
     onGuess(foundPerson)
 
@@ -57,6 +70,14 @@ function GuessInput({ persons = [], onGuess, disabled, attemptsLeft = 6 }) {
   }
 
   const handleSelectSuggestion = (person) => {
+    // ✅ Double check : vérifier si la personne a déjà été devinée
+    const alreadyGuessed = attempts.some(attempt => attempt.id === person.id)
+    if (alreadyGuessed) {
+      alert('❌ Vous avez déjà deviné cette personne !')
+      setGuess('')
+      return
+    }
+
     setGuess(person.name)
     setSuggestions([])
     setShowSuggestions(false)

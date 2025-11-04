@@ -23,10 +23,10 @@ function Hero() {
           </p>
 
           <div className="hero-buttons">
-            <button className="btn btn-primary" onClick={() => navigate('/game')}>
+            <button className="btn btn-primary" onClick={() => navigate('/daily')}>
               🎮 Jouer Maintenant
             </button>
-            <button className="btn btn-secondary" onClick={() => navigate('#modes')}>
+            <button className="btn btn-secondary" onClick={() => document.getElementById('modes').scrollIntoView({ behavior: 'smooth' })}>
               📖 Découvrir les Modes
             </button>
           </div>
