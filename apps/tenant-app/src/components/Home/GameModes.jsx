@@ -6,24 +6,6 @@ function GameModes() {
 
   const modes = [
     {
-      id: 'daily',
-      title: 'Mode Quotidien',
-      emoji: '📅',
-      description: 'Un nouveau défi chaque jour. Devinez avec le moins de tentatives possible !',
-      features: ['1 énigme par jour', 'Indices progressifs', 'Statistiques'],
-      color: 'green',
-      action: () => navigate('/daily')
-    },
-    {
-      id: 'collection',
-      emoji: '🎣',
-      title: 'Mode Collection',
-      description: 'Capturez autant de personnes que possible. Complétez votre collection !',
-      features: ['Capture aléatoire', 'Collection', 'Rareté'],
-      color: 'blue',
-      comingSoon: true
-    },
-    {
       id: 'marathon',
       emoji: '🏃',
       title: 'Mode Marathon',

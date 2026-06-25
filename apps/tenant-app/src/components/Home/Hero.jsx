@@ -23,7 +23,7 @@ function Hero() {
           </p>
 
           <div className="hero-buttons">
-            <button className="btn btn-primary" onClick={() => navigate('/daily')}>
+            <button className="btn btn-primary" onClick={() => navigate('/marathon')}>
               🎮 Jouer Maintenant
             </button>
             <button className="btn btn-secondary" onClick={() => document.getElementById('modes').scrollIntoView({ behavior: 'smooth' })}>
@@ -33,11 +33,11 @@ function Hero() {
 
           <div className="hero-stats">
             <div className="stat">
-              <span className="stat-number">1 défi</span>
-              <span className="stat-label">par jour</span>
+              <span className="stat-number">∞ coups</span>
+              <span className="stat-label">sans limite</span>
             </div>
             <div className="stat">
-              <span className="stat-number">3 modes</span>
+              <span className="stat-number">1 mode</span>
               <span className="stat-label">de jeu</span>
             </div>
             <div className="stat">
