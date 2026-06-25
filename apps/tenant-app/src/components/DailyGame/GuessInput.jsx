@@ -1,8 +1,13 @@
 import { useState, useEffect } from 'react'
 import './GuessInput.css'
 
+// Référence stable pour les valeurs par défaut (évite une boucle de rendu :
+// un tableau littéral par défaut crée une nouvelle référence à chaque rendu,
+// ce qui relancerait le useEffect en continu).
+const EMPTY_ARRAY = []
+
 // Composant pour saisir une réponse avec autocomplétion
-function GuessInput({ persons = [], onGuess, disabled, attemptsLeft = 6, attempts = [] }) {
+function GuessInput({ persons = EMPTY_ARRAY, onGuess, disabled, attemptsLeft = 6, attempts = EMPTY_ARRAY }) {
   const [guess, setGuess] = useState('')
   const [suggestions, setSuggestions] = useState([])
   const [selectedIndex, setSelectedIndex] = useState(-1)

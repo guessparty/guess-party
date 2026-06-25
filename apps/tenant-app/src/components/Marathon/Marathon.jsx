@@ -1,12 +1,14 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
 import GuessInput from '../DailyGame/GuessInput'
 import CharacteristicCard from '../DailyGame/CharacteristicCard'
 import { MATCH_TYPES } from '../../utils/comparisonLogic'
+import { useApp } from '../../context/AppContext'
 import './Marathon.css'
 
 function Marathon() {
   const navigate = useNavigate()
+  const { plan, planConfig, canPlay, incrementUsage, clearActivePersons } = useApp()
   const [allPersons, setAllPersons] = useState([])
   const [currentPerson, setCurrentPerson] = useState(null)
   const [guessedPersons, setGuessedPersons] = useState([])
@@ -16,18 +18,40 @@ function Marathon() {
   const [playerName, setPlayerName] = useState('')
   const [showNameInput, setShowNameInput] = useState(false)
   const [allAttempts, setAllAttempts] = useState([])
+  const [quotaBlocked, setQuotaBlocked] = useState(false)
+  const startedRef = useRef(false)
 
   useEffect(() => {
+    // Garde contre le double-montage de React StrictMode (compte une seule partie)
+    if (startedRef.current) return
+    startedRef.current = true
+
     const saved = localStorage.getItem('guess-party-persons')
-    if (saved) {
-      const persons = JSON.parse(saved)
-      setAllPersons(persons)
-      selectNewPerson(persons, [])
+    const persons = saved ? JSON.parse(saved) : []
+
+    if (persons.length === 0) {
       setLoading(false)
-    } else {
-      setLoading(false)
+      return
     }
+
+    if (!canPlay) {
+      setQuotaBlocked(true)
+      setLoading(false)
+      return
+    }
+
+    incrementUsage()
+    setAllPersons(persons)
+    selectNewPerson(persons, [])
+    setLoading(false)
   }, [])
+
+  // Formules sans sauvegarde : la base est à recréer à chaque partie
+  useEffect(() => {
+    if (gameOver && !planConfig.canSaveDatabases) {
+      clearActivePersons()
+    }
+  }, [gameOver, planConfig.canSaveDatabases, clearActivePersons])
 
   const selectNewPerson = (persons, alreadyGuessed) => {
     const remaining = persons.filter(p => !alreadyGuessed.find(g => g.id === p.id))
@@ -125,13 +149,28 @@ function Marathon() {
   }
 
   const playAgain = () => {
+    if (!canPlay) {
+      setQuotaBlocked(true)
+      return
+    }
+
+    // Recharge la base active : vidée pour les formules sans sauvegarde
+    const saved = localStorage.getItem('guess-party-persons')
+    const persons = saved ? JSON.parse(saved) : []
+    if (persons.length === 0) {
+      navigate('/admin')
+      return
+    }
+
+    incrementUsage()
+    setAllPersons(persons)
     setTotalAttempts(0)
     setGuessedPersons([])
     setGameOver(false)
     setPlayerName('')
     setShowNameInput(false)
     setAllAttempts([])
-    selectNewPerson(allPersons, [])
+    selectNewPerson(persons, [])
   }
 
   const progress = ((guessedPersons.length / allPersons.length) * 100).toFixed(0)
@@ -141,6 +180,26 @@ function Marathon() {
       <div className="marathon">
         <div className="loading">
           <p>⏳ Chargement du mode Marathon...</p>
+        </div>
+      </div>
+    )
+  }
+
+  if (quotaBlocked) {
+    return (
+      <div className="marathon">
+        <div className="error-state">
+          <h2>🚫 Quota de parties atteint</h2>
+          <p>
+            Vous avez utilisé toutes vos {planConfig.gamesPerMonth} parties de ce mois
+            (formule {planConfig.name}).
+          </p>
+          <button onClick={() => navigate('/tarifs')} className="btn-admin">
+            💎 Voir les tarifs
+          </button>
+          <button onClick={() => navigate('/')} className="btn-back">
+            ← Retour
+          </button>
         </div>
       </div>
     )

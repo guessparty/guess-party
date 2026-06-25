@@ -4,6 +4,36 @@
   padding-bottom: 2rem;
 }
 
+.marathon-plan-banner {
+  display: inline-flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  background: rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  color: white;
+  padding: 0.6rem 1rem;
+  border-radius: 0.85rem;
+  margin: 1rem 0 1.5rem;
+  font-size: 0.95rem;
+}
+
+.marathon-plan-banner .plan-link {
+  background: white;
+  color: #f5576c;
+  border: none;
+  padding: 0.35rem 0.8rem;
+  border-radius: 0.6rem;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 0.85rem;
+}
+
+.marathon-plan-banner .plan-link:hover {
+  transform: scale(1.05);
+}
+
 .marathon-hero {
   max-width: 1400px;
   margin: 0 auto;

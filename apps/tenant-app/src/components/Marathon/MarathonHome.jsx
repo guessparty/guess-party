@@ -1,8 +1,13 @@
 import { useNavigate } from 'react-router-dom'
+import { useApp } from '../../context/AppContext'
 import './MarathonHome.css'
 
 function MarathonHome() {
   const navigate = useNavigate()
+  const { planConfig, remainingGames } = useApp()
+
+  const remainingLabel =
+    remainingGames === Infinity ? 'illimitées' : `${remainingGames}`
 
   return (
     <div className="marathon-home">
@@ -10,6 +15,15 @@ function MarathonHome() {
         <div className="hero-content">
           <h1>🏃 Mode Marathon</h1>
           <p className="hero-subtitle">Défiez-vous sans limite !</p>
+
+          <div className="marathon-plan-banner">
+            Formule <strong>{planConfig.name}</strong> · Parties restantes ce mois :{' '}
+            <strong>{remainingLabel}</strong>
+            <button className="plan-link" onClick={() => navigate('/tarifs')}>
+              💎 Tarifs
+            </button>
+          </div>
+
           <p className="hero-description">
             Trouvez toutes les personnes avec le moins de coup possible.<br/> 
             Pas de limite de tentatives, mais êtes-vous à la hauteur ?

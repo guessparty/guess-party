@@ -1,0 +1,176 @@
+.db-manager {
+  background: white;
+  border-radius: 1rem;
+  padding: 2rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.db-manager h2 {
+  color: #111827;
+  margin-bottom: 0.5rem;
+}
+
+.db-subtitle {
+  color: #6b7280;
+  margin-bottom: 1.5rem;
+  font-size: 0.95rem;
+}
+
+.db-save-box {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
+}
+
+.db-input {
+  flex: 1;
+  min-width: 200px;
+  padding: 0.8rem 1rem;
+  border: 1px solid #d1d5db;
+  border-radius: 0.75rem;
+  font-size: 1rem;
+  font-family: inherit;
+}
+
+.db-input:focus {
+  outline: none;
+  border-color: #8b5cf6;
+  box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.15);
+}
+
+.db-save-btn {
+  padding: 0.8rem 1.2rem;
+  border: none;
+  border-radius: 0.75rem;
+  background: linear-gradient(135deg, #8b5cf6 0%, #6366f1 100%);
+  color: white;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.db-save-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.db-error {
+  background: #fef2f2;
+  color: #dc2626;
+  padding: 0.75rem 1rem;
+  border-radius: 0.75rem;
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+}
+
+.db-empty {
+  color: #6b7280;
+  text-align: center;
+  padding: 2rem;
+  background: #f9fafb;
+  border-radius: 0.75rem;
+}
+
+.db-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.db-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 1.25rem;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.85rem;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.db-item.selected {
+  border-color: #8b5cf6;
+  background: #f5f3ff;
+}
+
+.db-item-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.db-item-name {
+  font-weight: 700;
+  color: #111827;
+}
+
+.db-item-count {
+  font-size: 0.85rem;
+  color: #6b7280;
+}
+
+.db-item-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.db-select-btn {
+  padding: 0.5rem 1rem;
+  border: 1px solid #8b5cf6;
+  background: white;
+  color: #6d28d9;
+  border-radius: 0.6rem;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.db-select-btn:hover {
+  background: #f5f3ff;
+}
+
+.db-badge {
+  color: #6d28d9;
+  font-weight: 700;
+  font-size: 0.9rem;
+}
+
+.db-delete-btn {
+  padding: 0.5rem 0.7rem;
+  border: none;
+  background: #fef2f2;
+  border-radius: 0.6rem;
+  cursor: pointer;
+}
+
+.db-locked {
+  text-align: center;
+  padding: 2rem 1rem;
+}
+
+.db-locked h2 {
+  margin-bottom: 1rem;
+}
+
+.db-locked p {
+  color: #4b5563;
+  max-width: 600px;
+  margin: 0 auto 1.5rem;
+  line-height: 1.6;
+}
+
+.db-upgrade-btn {
+  padding: 0.9rem 1.6rem;
+  border: none;
+  border-radius: 0.75rem;
+  background: linear-gradient(135deg, #8b5cf6 0%, #6366f1 100%);
+  color: white;
+  font-weight: 700;
+  font-size: 1rem;
+  cursor: pointer;
+  font-family: inherit;
+}

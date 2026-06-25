@@ -1,0 +1,214 @@
+.pricing-page {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: 1.5rem 1.5rem 4rem;
+  font-family: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+.pricing-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto 2rem;
+}
+
+.pricing-back,
+.pricing-login-link {
+  background: rgba(255, 255, 255, 0.15);
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  padding: 0.6rem 1.2rem;
+  border-radius: 0.75rem;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: all 0.2s ease;
+}
+
+.pricing-back:hover,
+.pricing-login-link:hover {
+  background: rgba(255, 255, 255, 0.25);
+}
+
+.pricing-account-info {
+  color: white;
+  font-size: 0.95rem;
+}
+
+.pricing-hero {
+  text-align: center;
+  color: white;
+  margin-bottom: 3rem;
+}
+
+.pricing-hero h1 {
+  font-size: 2.8rem;
+  margin-bottom: 0.5rem;
+}
+
+.pricing-hero p {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 1.15rem;
+}
+
+.pricing-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+  max-width: 1100px;
+  margin: 0 auto;
+  align-items: stretch;
+}
+
+.pricing-card {
+  position: relative;
+  background: white;
+  border-radius: 1.5rem;
+  padding: 2.5rem 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2);
+  border-top: 5px solid #9ca3af;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.pricing-card:hover {
+  transform: translateY(-8px);
+}
+
+.pricing-gray { border-top-color: #9ca3af; }
+.pricing-blue { border-top-color: #3b82f6; }
+.pricing-purple { border-top-color: #8b5cf6; }
+
+.pricing-card.featured {
+  transform: scale(1.04);
+  box-shadow: 0 25px 40px -5px rgba(139, 92, 246, 0.4);
+}
+
+.pricing-card.featured:hover {
+  transform: scale(1.04) translateY(-8px);
+}
+
+.pricing-card.current {
+  outline: 3px solid #10b981;
+  outline-offset: 2px;
+}
+
+.pricing-badge {
+  position: absolute;
+  top: -14px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: linear-gradient(135deg, #8b5cf6 0%, #6366f1 100%);
+  color: white;
+  padding: 0.35rem 1rem;
+  border-radius: 1rem;
+  font-size: 0.8rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.pricing-emoji {
+  font-size: 3rem;
+  text-align: center;
+}
+
+.pricing-name {
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: #111827;
+  text-align: center;
+  margin: 0;
+}
+
+.pricing-tagline {
+  text-align: center;
+  color: #6b7280;
+  font-size: 0.95rem;
+  margin: 0;
+}
+
+.pricing-price {
+  text-align: center;
+  margin: 0.5rem 0 1rem;
+}
+
+.pricing-amount {
+  font-size: 2.6rem;
+  font-weight: 800;
+  color: #111827;
+}
+
+.pricing-period {
+  font-size: 0.95rem;
+  color: #6b7280;
+}
+
+.pricing-features {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  flex: 1;
+}
+
+.pricing-features li {
+  color: #374151;
+  font-size: 0.95rem;
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+.pricing-cta {
+  margin-top: auto;
+  padding: 0.9rem 1rem;
+  border: none;
+  border-radius: 0.75rem;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: inherit;
+  color: white;
+  background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.pricing-gray .pricing-cta {
+  background: linear-gradient(135deg, #6b7280 0%, #4b5563 100%);
+}
+
+.pricing-blue .pricing-cta {
+  background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+}
+
+.pricing-purple .pricing-cta {
+  background: linear-gradient(135deg, #8b5cf6 0%, #6366f1 100%);
+}
+
+.pricing-cta:hover:not(:disabled) {
+  transform: scale(1.03);
+  box-shadow: 0 8px 20px rgba(99, 102, 241, 0.35);
+}
+
+.pricing-cta:disabled {
+  background: #10b981;
+  cursor: default;
+  opacity: 0.95;
+}
+
+.pricing-footnote {
+  text-align: center;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 0.85rem;
+  margin-top: 2.5rem;
+}
+
+@media (max-width: 768px) {
+  .pricing-hero h1 { font-size: 2rem; }
+  .pricing-card.featured { transform: none; }
+  .pricing-card.featured:hover { transform: translateY(-8px); }
+}

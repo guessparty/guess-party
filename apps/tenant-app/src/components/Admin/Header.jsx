@@ -16,7 +16,7 @@ function Header({ setView }) {
           <button className="btn-secondary" onClick={() => navigate('/')}>
             ← Retour à l'accueil
           </button>
-          <button className="btn-primary" onClick={() => navigate('/daily')}>
+          <button className="btn-primary" onClick={() => navigate('/marathon')}>
             🎮 Jouer
           </button>
         </div>

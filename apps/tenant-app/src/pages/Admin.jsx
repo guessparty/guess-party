@@ -3,9 +3,12 @@ import Header from '../components/Admin/Header'
 import PersonList from '../components/Admin/PersonList'
 import PersonForm from '../components/Admin/PersonForm'
 import CSVUpload from '../components/Admin/CSVUpload'
+import DatabaseManager from '../components/Admin/DatabaseManager'
+import { useApp } from '../context/AppContext'
 import './Admin.css'
 
 function Admin() {
+  const { planConfig } = useApp()
   const [persons, setPersons] = useState(() => {
     const saved = localStorage.getItem('guess-party-persons')
     return saved ? JSON.parse(saved) : []
@@ -76,6 +79,12 @@ function Admin() {
           >
             📤 Import CSV
           </button>
+          <button 
+            className={`nav-btn ${view === 'databases' ? 'active' : ''}`}
+            onClick={() => { setView('databases'); setEditingId(null) }}
+          >
+            💾 Bases {planConfig.canSaveDatabases ? `(${planConfig.maxDatabases})` : '🔒'}
+          </button>
         </nav>
 
         <div className="admin-content">
@@ -111,6 +120,13 @@ function Admin() {
             <CSVUpload 
               onUpload={handleCSVUpload}
               onCancel={() => setView('list')}
+            />
+          )}
+
+          {view === 'databases' && (
+            <DatabaseManager
+              persons={persons}
+              onLoadPersons={(loaded) => setPersons(loaded)}
             />
           )}
         </div>
