@@ -67,15 +67,18 @@ export function AppProvider({ children }) {
   const logout = useCallback(() => persistUser(null), [persistUser])
 
   // Changement de formule (paiement simulé pour Premium)
+  // Lit l'utilisateur depuis localStorage (source de vérité) pour fonctionner
+  // même juste après un register/login dont l'état React n'est pas encore propagé.
   const changePlan = useCallback((planId) => {
-    if (!user) throw new Error('Connectez-vous pour choisir cette formule.')
+    const currentUser = readJSON(USER_KEY, null)
+    if (!currentUser) throw new Error('Connectez-vous pour choisir cette formule.')
     const accounts = readJSON(ACCOUNTS_KEY, {})
-    if (accounts[user.email]) {
-      accounts[user.email].plan = planId
+    if (accounts[currentUser.email]) {
+      accounts[currentUser.email].plan = planId
       localStorage.setItem(ACCOUNTS_KEY, JSON.stringify(accounts))
     }
-    persistUser({ ...user, plan: planId })
-  }, [user, persistUser])
+    persistUser({ ...currentUser, plan: planId })
+  }, [persistUser])
 
   // --- Quota de parties ---
   const refreshUsage = useCallback(() => setUsage(getUsage()), [])
